@@ -1,0 +1,78 @@
+﻿@using ProjectOne.ViewModels
+@model ProjectOne.ViewModels.ReviewViewModel
+@{
+    ViewBag.Title = "Review "+Model.Year;
+    int Max = Model.ItemCount.Length;
+    int NumOfDays = (Model.Year%4==0)?366:365;
+    int Total = NumOfDays * 5;
+    int Completed = Model.PrayerCount.Sum();
+    int Pending = Total - Completed;
+}
+<script src="~/scripts/ReviewPage.js"></script>
+<section>
+<h1 class="floatleft">Prayer Profile</h1>
+<div  class="section group">
+<article class="col span_1_of_5"> 
+ Total - <span class="stats">@Total</span>
+</article>
+<article class="col span_1_of_5"> 
+ Completed - <span class="stats">@Completed</span>  
+</article>
+<article class="col span_1_of_5"> 
+ Insha Allah - <span class="stats">@Pending</span> 
+</article>
+</div>
+<div class="section group">
+<article class="col span_3_of_3">
+<table class="reviewtable">
+<thead>
+    <tr>
+        <td colspan="@Max"> 
+            <nav class="alignright">
+                <ul>
+                    <li>@Html.ActionLink("MONTH", "Month", new {year = DateTime.Now.Year, month=DateTime.Now.Month })</li>
+                    <li>@Html.ActionLink("YEAR", "Year", new {year = DateTime.Now.Year})</li>
+                </ul>
+            </nav>
+            @Html.ActionLink("<", "Year", new { year = Model.Year - 1 }, new {Class="wb"}) 
+            @Model.Year
+            @Html.ActionLink(">","Year",new { year= Model.Year+1} ,new {Class="wb"}) 
+        </td>
+    </tr>
+</thead>
+<tr>
+@for(int i=0;i<Max;i++)
+{
+            <td style="width:@((100.0/Max)+"%");">
+                <div class="vprogressbarbg">
+                <div class="vprogressbar" style="height:@((100.0f-Model.ItemPercentage[i]*100.0f)+"%");">&nbsp;</div>
+                </div>
+            </td>
+}
+        </tr>
+        <tr>
+@for(int i=0;i<Max;i++)
+{
+            <td>
+                @String.Format("{0:p0}",(Model.ItemPercentage[i])) <br />
+                @Html.ActionLink(Common.Month[i], "Month", new { year = Model.Year, month = i+1 })
+            </td>
+}
+        </tr>
+    </table>
+</article>
+</div>
+</section>
+<section>
+<h1>Prayer Habits</h1>
+<div  class="section group">
+@for(int i=0;i<5;i++){
+<article class="col span_1_of_5">
+    <p id="legend@(i)" class="progresslegend">@Common.Waqt[i]<small>( @Model.PrayerCount[i] / @NumOfDays )</small></p>
+    <canvas id="c@(i)" class="progresscircle"></canvas>
+    <div id="p@(i)" class="progressbarbg"><div class="progressbar" style="width:@(Model.PrayerPercent[i]*100.0f)%;">@String.Format("{0:f0}%",Model.PrayerPercent[i]*100.0f)</div></div>
+    <script>paintProgress(@i, @Model.PrayerPercent[i], "@String.Format("{0:p0}",Model.PrayerPercent[i])");</script>
+</article>
+}
+</div>
+</section>

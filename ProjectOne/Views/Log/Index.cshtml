@@ -1,0 +1,67 @@
+﻿@using ProjectOne.ViewModels
+@model ProjectOne.ViewModels.LogViewModel
+@{
+    ViewBag.Title = "Log Prayers";
+	var today = Model.StartDate;
+    var prev  = Model.StartDate.AddDays(-7.0);
+    var next  = Model.EndDate.AddDays(1.0);
+}
+<script>
+    function checkAll() {
+        var inputs = document.getElementsByTagName("input");
+        for(var i=0;i< inputs.length;i++)
+        {
+            if (inputs[i].type == "checkbox")
+                inputs[i].checked = true;
+        }
+    }
+</script>
+<section class="section group">
+<article class="col span_3_of_3">
+<h1>Enter the completed prayers</h1>
+@using(var f = Html.BeginForm("Save","Log"))
+{
+    @Html.HiddenFor(o=>o.StartDate)
+    @Html.HiddenFor(o=>o.EndDate)
+<table> 
+<thead>
+<tr>
+<th colspan="7">
+@Html.ActionLink("<", "Index", new { year = prev.Year, month = prev.Month, day = prev.Day }, new {Class="wb"})
+<a href="javascript:checkAll()">
+@Common.Month[Model.StartDate.Month-1]
+@Model.StartDate.Year
+</a>
+@Html.ActionLink(">", "Index", new { year = next.Year, month = next.Month, day = next.Day },new {Class="wb"})
+<input type="submit" value="Save" class="small floatright"/>
+</th>
+</tr>
+<tr>
+<th style="width:2%;"></th>
+<th style="width:7%;"></th>
+@for (int i = 0; i < 5; i++) 
+{
+    <th style="overflow:hidden;">@Common.Waqt[i].Substring(0,2)<span class="moredata">@Common.Waqt[i].Substring(2)</span></th>
+}
+</tr>
+</thead>
+<tbody>
+@for (int i = 0; i < 7; i++) 
+{
+    var heading = today.Day + " " + Common.Month[today.Month - 1];
+    var trid = "tr" + i % 2;
+    <tr class='@trid'><th  style='text-align:left;'>@Common.Weekdays[(int)today.DayOfWeek][0]<span class="moredata">@Common.Weekdays[(int)today.DayOfWeek].Substring(1)</span></th><th style='text-align:left;'><small>@heading</small></th>
+
+        @for (int j = 0; j < 5; j++) 
+        {
+            <td>@Html.CheckBoxFor(o=>o.SalahStatus[i*5+j])
+                <!--input type="checkbox" @(Model.SalahStatus[i*5+j]?"checked":"")/--> </td>
+        }
+        @{today = today.AddDays(1.0);}
+        </tr>
+}
+</tbody>
+</table>
+}
+</article>
+</section>

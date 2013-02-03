@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Serif|Arvo|Roboto+Condensed|Oswald' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="~/Content/Styles/Site.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Styles/Responsive.css" />
+<!--[if lt IE 9]>
+	<script src="~/scripts/html5shiv.js"></script>
+<![endif]-->
+</head>
+<body>
+<div class="container">
+<header>
+<h1 class="floatleft">SalahDone.com</h1>
+</header>
+<nav class="floatright" >
+<ul>
+<li>@Html.ActionLink("HOME","Index")</li>
+<li>@Html.ActionLink("LOGIN","Login")</li>
+<li>@Html.ActionLink("ABOUT","Index","Log")</li>
+</ul>
+</nav>
+<div class="section group">
+<hr/>
+</div>
+        @RenderBody()
+<hr/>
+<footer>
+&#169; @DateTime.Now.Year | Contact us | Terms of use| Privacy Policy
+</footer>
+</div>
+</body>
+</html>
