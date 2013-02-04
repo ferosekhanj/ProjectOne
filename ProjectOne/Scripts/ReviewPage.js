@@ -2,10 +2,6 @@
     var canvas = document.getElementById('c' + id);
     var context = false;
     if (canvas.getContext && (context = canvas.getContext('2d'))) {
-        document.getElementById('p' + id).style.display = "none";
-        document.getElementById('legend' + id).style.textAlign = "center";
-        canvas.style.display = "block";
-
         var w = canvas.width = canvas.clientWidth;
         var h = canvas.height = canvas.clientHeight;
         var size = (w > h) ? h : w;

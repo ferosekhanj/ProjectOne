@@ -20,7 +20,7 @@
 <th style="width:10%;"></th>
 @for (int i = 0; i < 5; i++) 
 {
-    <th style="overflow:hidden;">@Common.Waqt[i].Substring(0,2)<span class="moredata">@Common.Waqt[i].Substring(2)</span></th>
+    <th><span aria-hidden="true" class="icons icon-@Common.Waqt[i].ToLower()"> </span>@Common.Waqt[i].Substring(0,2)<span class="moredata">@Common.Waqt[i].Substring(2)</span></th>
 }
 </tr>
 </thead>

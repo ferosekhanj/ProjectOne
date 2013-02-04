@@ -30,8 +30,8 @@
         <td colspan="@Max"> 
                 <nav class="alignright">
                     <ul>
-                        <li>@Html.ActionLink("MONTH", "Month", new {year = DateTime.Now.Year, month=DateTime.Now.Month })</li>
-                        <li>@Html.ActionLink("YEAR", "Year", new {year = DateTime.Now.Year})</li>
+                        <li><span aria-hidden="true" class="icons icon-calendar"> </span>@Html.ActionLink("MONTH", "Month", new {year = DateTime.Now.Year, month=DateTime.Now.Month })</li>
+                        <li><span aria-hidden="true" class="icons icon-calendar-2"> </span>@Html.ActionLink("YEAR", "Year", new {year = DateTime.Now.Year})</li>
                     </ul>
                 </nav>
                 @Html.ActionLink("<", "Month", new {year = (Model.Month!=1)?Model.Year:Model.Year-1, month=(Model.Month!=1)?Model.Month-1:12 }, new {Class="wb"}) 
@@ -40,6 +40,7 @@
         </td>
     </tr>
 </thead>
+<tbody>
 <tr>
 @for(int i=0;i<Max;i++)
 {
@@ -61,6 +62,7 @@
             </td>
 }
         </tr>
+    </tbody>
     </table>
 </article>
 </div>
@@ -70,7 +72,7 @@
 <div class="section group">
 @for(int i=0;i<5;i++){
 <article class="col span_1_of_5">
-    <p id="legend@(i)" class="progresslegend">@Common.Waqt[i] <small>(@Model.PrayerCount[i] / @Max)</small></p>
+    <p id="legend@(i)" class="progresslegend"><span aria-hidden="true" class="icons icon-@Common.Waqt[i].ToLower()"> </span>@Common.Waqt[i] <small>(@Model.PrayerCount[i] / @Max)</small></p>
     <canvas id="c@(i)" class="progresscircle"></canvas>
     <div id="p@(i)" class="progressbarbg"><div class="progressbar" style="width:@(Model.PrayerPercent[i]*100.0f)%;">@String.Format("{0:f0}%",Model.PrayerPercent[i]*100.0f)</div></div>
     <script>paintProgress(@i, @Model.PrayerPercent[i], "@String.Format("{0:p0}",Model.PrayerPercent[i])");</script>
