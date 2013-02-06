@@ -125,9 +125,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\Images\log.png" />
-    <Content Include="Content\Images\makeup.png" />
-    <Content Include="Content\Images\review.png" />
     <Content Include="Content\Styles\Responsive.css" />
     <Content Include="Content\Styles\Site.css" />
     <Content Include="Global.asax" />
@@ -146,6 +143,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Fonts\" />
+    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

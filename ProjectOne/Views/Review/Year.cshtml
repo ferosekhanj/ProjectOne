@@ -15,10 +15,10 @@
  <span class="stats">@Total</span>&nbsp;Total 
 </p>
 <p class="col span_1_of_5"> 
- <span class="stats">@Completed</span>&nbsp;Completed   
+ <span class="stats">@Completed</span>&nbsp;Done   
 </p>
 <p class="col span_1_of_5"> 
- <span class="stats">@Pending</span>&nbsp;Todo Insha Allah
+ <span class="stats">@Pending</span>&nbsp;Todo
 </p>
 <div class="section group">
 <article class="col span_3_of_3">
@@ -39,7 +39,15 @@
 @for(int i=0;i<Max;i++)
 {
             <td style="width:@((100.0/Max)+"%");" class="vprogressbarbg">
-                <div class="vprogressbar" style="height:@((Model.ItemPercentage[i]*100.0f)+"%");">&nbsp;</div>
+                @if(Model.ItemPercentage[i]==0.0f)
+                {
+                    <div class="vprogressbar" style="height:100%;background-color:whitesmoke;">&nbsp;</div>
+                }
+                else
+                {
+                    @String.Format("{0:f0}%",Model.ItemPercentage[i]*100.0f)
+                    <div class="vprogressbar" style="height:@((Model.ItemPercentage[i] * 100.0f) + "%");">&nbsp;</div>
+                }
             </td>
 }
         </tr>
@@ -72,7 +80,7 @@
 <div  class="section group">
 @for(int i=0;i<5;i++){
 <article class="col span_1_of_5">
-    <h1 id="legend@(i)"><span aria-hidden="true" class="icons icon-@Common.Waqt[i].ToLower()"> </span>@Common.Waqt[i]<small>( @Model.PrayerCount[i] / @NumOfDays )</small></h1>
+    <h1 id="legend@(i)"><span aria-hidden="true" class="icons icon-@Common.Waqt[i].ToLower()"> </span>@Common.Waqt[i]&nbsp;<small>(@Model.PrayerCount[i]/@NumOfDays )</small></h1>
     <canvas id="c@(i)" class="progresscircle"></canvas>
     <div id="p@(i)" class="progressbarbg"><div class="progressbar" style="width:@(Model.PrayerPercent[i]*100.0f)%;">@String.Format("{0:f0}%",Model.PrayerPercent[i]*100.0f)</div></div>
 </article>

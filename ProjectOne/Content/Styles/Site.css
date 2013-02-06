@@ -6,8 +6,7 @@ color : #000;
 background-color:#eee;
 }
 .container{
-    max-width:960px;
-    width:97%;
+    width:98%;
     clear: both;
     position: relative;
     margin: 0 auto;
@@ -295,6 +294,9 @@ font-weight:bold;
     }
     h1{
         font-size:110%;
+    }
+    .span_1_of_5 h1 {
+        text-align:left;
     }
     body { 
         font : 75%/1.0 ; 	
