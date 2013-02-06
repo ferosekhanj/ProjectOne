@@ -8,50 +8,44 @@
     int Completed = Model.PrayerCount.Sum();
     int Pending = Total - Completed;
 }
-<script src="~/scripts/ReviewPage.js"></script>
 <section>
 <h1 class="floatleft">Prayer Profile</h1>
 <div  class="section group">
-<article class="col span_1_of_5"> 
- Total - <span class="stats">@Total</span>
-</article>
-<article class="col span_1_of_5"> 
- Completed - <span class="stats">@Completed</span>  
-</article>
-<article class="col span_1_of_5"> 
- Insha Allah - <span class="stats">@Pending</span> 
-</article>
+<p class="col span_1_of_5"> 
+ <span class="stats">@Total</span>&nbsp;Total 
+</p>
+<p class="col span_1_of_5"> 
+ <span class="stats">@Completed</span>&nbsp;Completed   
+</p>
+<p class="col span_1_of_5"> 
+ <span class="stats">@Pending</span>&nbsp;Todo Insha Allah
+</p>
 </div>
 <div  class="section group">
 <article class="col span_3_of_3">
+<h1 class="floatleft">
+@Html.ActionLink("<", "Month", new {year = (Model.Month!=1)?Model.Year:Model.Year-1, month=(Model.Month!=1)?Model.Month-1:12 }, new {Class="wb"}) 
+@Common.Month[Model.Month-1] @Model.Year 
+@Html.ActionLink(">","Month",new {year=(Model.Month!=12)?Model.Year:Model.Year+1, month=(Model.Month!=12)?Model.Month+1:1} ,new {Class="wb"}) 
+</h1>
+<nav class="floatright">
+    <h1 class="visuallyhidden">Statistics time frame menu</h1>
+    <ul>
+        <li><span aria-hidden="true" class="icons icon-calendar"> </span>@Html.ActionLink("MONTH", "Month", new {year = DateTime.Now.Year, month=DateTime.Now.Month })</li>
+        <li><span aria-hidden="true" class="icons icon-calendar-2"> </span>@Html.ActionLink("YEAR", "Year", new {year = DateTime.Now.Year})</li>
+    </ul>
+</nav>
 <table class="reviewtable">
-<thead>
-    <tr>
-        <td colspan="@Max"> 
-                <nav class="alignright">
-                    <ul>
-                        <li><span aria-hidden="true" class="icons icon-calendar"> </span>@Html.ActionLink("MONTH", "Month", new {year = DateTime.Now.Year, month=DateTime.Now.Month })</li>
-                        <li><span aria-hidden="true" class="icons icon-calendar-2"> </span>@Html.ActionLink("YEAR", "Year", new {year = DateTime.Now.Year})</li>
-                    </ul>
-                </nav>
-                @Html.ActionLink("<", "Month", new {year = (Model.Month!=1)?Model.Year:Model.Year-1, month=(Model.Month!=1)?Model.Month-1:12 }, new {Class="wb"}) 
-                @Common.Month[Model.Month-1] @Model.Year
-                @Html.ActionLink(">","Month",new {year=(Model.Month!=12)?Model.Year:Model.Year+1, month=(Model.Month!=12)?Model.Month+1:1} ,new {Class="wb"}) 
-        </td>
-    </tr>
-</thead>
 <tbody>
 <tr>
 @for(int i=0;i<Max;i++)
 {
-            <td style="width:@((100.0/Max)+"%");">
-                <div class="vprogressbarbg">
-                <div class="vprogressbar" style="height:@((100.0f-Model.ItemPercentage[i]*100.0f)+"%");">&nbsp;</div>
-                </div>
+            <td style="width:@((100.0/Max)+"%");" class="vprogressbarbg">
+                <div class="vprogressbar" style="height:@((Model.ItemPercentage[i]*100.0f)+"%");">&nbsp;</div>
             </td>
 }
         </tr>
-        <tr>
+        <tr class="desktopaxis">
 @for(int i=0;i<Max;i++)
 {
             <td>
@@ -60,6 +54,17 @@
                 @Html.ActionLink((i+1).ToString(), "Index", "Log", new { year = Model.Year, month = Model.Month, day=i+1 },null)
                 </small>
             </td>
+}
+        </tr>
+        <tr  class="mobileaxis">
+@for(int i=0;i<Max;i++)
+{
+    if( (i+1) %5 == 0 )
+    {
+            <td colspan="5" style="text-align:right;">
+                <small>@Html.ActionLink((i+1).ToString(), "Index", "Log", new { year = Model.Year, month = Model.Month, day=i+1 },null)</small>
+            </td>
+    }
 }
         </tr>
     </tbody>
@@ -72,11 +77,18 @@
 <div class="section group">
 @for(int i=0;i<5;i++){
 <article class="col span_1_of_5">
-    <p id="legend@(i)" class="progresslegend"><span aria-hidden="true" class="icons icon-@Common.Waqt[i].ToLower()"> </span>@Common.Waqt[i] <small>(@Model.PrayerCount[i] / @Max)</small></p>
+    <h1 id="legend@(i)"><span aria-hidden="true" class="icons icon-@Common.Waqt[i].ToLower()"> </span>@Common.Waqt[i] <small>(@Model.PrayerCount[i] / @Max)</small></h1>
     <canvas id="c@(i)" class="progresscircle"></canvas>
     <div id="p@(i)" class="progressbarbg"><div class="progressbar" style="width:@(Model.PrayerPercent[i]*100.0f)%;">@String.Format("{0:f0}%",Model.PrayerPercent[i]*100.0f)</div></div>
-    <script>paintProgress(@i, @Model.PrayerPercent[i], "@String.Format("{0:p0}",Model.PrayerPercent[i])");</script>
-</article>
+ </article>
 }
 </div>
 </section>
+<script src="~/scripts/ReviewPage.js"></script>
+<script>
+    document.body.onload = function () {
+   @for(int i=0;i<5;i++){
+        @:paintProgress(@i, @Model.PrayerPercent[i], "@String.Format("{0:p0}",Model.PrayerPercent[i])");
+    }
+    }
+</script>

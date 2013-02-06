@@ -19,7 +19,7 @@
 <section>
 <h1>Enter the completed prayers</h1>
 <div  class="section group">
-<article class="col span_3_of_3">
+<div class="col span_3_of_3">
 @using(var f = Html.BeginForm("Save","Log"))
 {
     @Html.HiddenFor(o=>o.StartDate)
@@ -64,6 +64,6 @@
 </tbody>
 </table>
 }
-</article>
+</div>
 </div>
 </section>

@@ -13,14 +13,9 @@ background-color:#eee;
     margin: 0 auto;
     padding: 2px;
 }
-header, footer, section,article,nav {
+header, footer, section,article {
     display: block;
 }
-
-article.bigarticle {
-    overflow-x: scroll;
-}
-
 nav ul{
     list-style-type:none;
     padding-left:0px;
@@ -36,54 +31,32 @@ nav ul li:last-child {
     border-right: none;
 }
 
-form ul{
-    list-style-type:none;
-    padding-left:0px;
-}
-
-form ul li {
-    display:inline;
-    padding-right:10px;
-}
-
-label {
-    cursor:default;
-    font-size:small;
-}
-
 h1, h2, h3, h4, h5, h6 {
 font-family:'Oswald','Roboto Condensed','Droid Sans',verdana, arial, helvetica, helve, sans-serif;
 color: rgb(51,153,51);
 font-weight:normal;
+margin:0px;
+padding:0px;
 }
 header h1 
 {
     font-size: 200%;
-    margin:0px;
-    padding:0px;
-
 }
-h1 {
+h1{
     font-size:140%;
-    margin-top:0px;
 }
-h2 {
-    font-size:120%;
-    margin-top:0px;
+.span_1_of_5 h1 {
+    font-size:100%;
+    text-align:center;
 }
-
 small {
 font-size:75%;
 }
-
 .floatleft {
     float:left;
 }
 .floatright {
     float:right;
-}
-.alignright {
-text-align:right;
 }
 blockquote {
 font-family: Georgia, serif;
@@ -172,7 +145,7 @@ fieldset ol li {
 
 label {
     display: block;
-    font-size: 1.2em;
+    font-size: 110%;
 }
 
 label.checkbox {
@@ -235,15 +208,20 @@ a, a:visited, a:hover, a:link {
 }
 
 hr {
-    border: 1px solid orange;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid orange;
+    margin: 1em 0;
+    padding: 0;
 }
 .progresscircle {
     width: 100%;
     height: 100%;
 }
 .progressbarbg {
-    width: 90%;
-    background-color: #ddd;
+    width: 98%;
+    background-color: #fff;
     display: none;
     overflow: visible;
 }
@@ -253,18 +231,17 @@ hr {
     overflow:visible;
     font-size:small;
 }
-.progresslegend {
-text-align:center;
-}
 .vprogressbarbg {
-    background-color: rgb(139,194,65);
-    width: 100%;
+    background-color:white ;
     height: 200px;
-    min-width:15px;
+    min-width:5px;
+    vertical-align:bottom;
 }
 .vprogressbar {
-    background-color: white;
-    width: 100%;
+    background-color: rgb(139,194,65);
+}
+.mobileaxis {
+    display:none;
 }
 .moredata {
 display:none;
@@ -272,35 +249,60 @@ display:none;
 .stats {
 font-weight:bold;
 }
-@media only screen and (max-width: 640px) {
+
+@media only screen and (max-width: 767px) {
     .progresscircle {
         display: none;
     }
     .progressbarbg {
         display: block;
     }
-    .progresslegend {
+    .span_1_of_5 h1 {
         text-align: left;
+        margin-bottom:5px;
     }
 }
-
 @media only screen and (min-width: 960px) {
-.moredata {
-    display:inline;
-}
+    .moredata {
+        display:inline;
+    }
 }
 @media only screen and (max-width: 480px) {
     blockquote {
-    font-family: Georgia, serif;
-    font-style: italic;
-    margin: 0px;
-    padding: 5px;
-    line-height: 1.45;
-    color: #383838;
+        font-family: Georgia, serif;
+        font-style: italic;
+        margin: 0px;
+        padding: 5px;
+        line-height: 1.45;
+        color: #383838;
     }
     cite {
         display:block;
         text-align:right;
+    }
+    .desktopaxis {
+        display:none;
+    }
+    .mobileaxis {
+        display:table-row;
+    }
+    .mobileaxis td {
+        vertical-align:top;
+    }
+    header h1 
+    {
+        font-size: 120%;
+    }
+    h1{
+        font-size:110%;
+    }
+    body { 
+        font : 75%/1.0 ; 	
+    }
+    a, a:visited, a:hover, a:link {
+        color:rgb(0,122,204);
+        text-decoration:none;
+        font-size:small;
     }
 }
 
@@ -338,7 +340,7 @@ you can use the generic selector below, but it's slower:
 	font-weight: normal;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
-    color:blue;
+    color:rgb(229,59,44);
 }
 .icon-zohar:before {
 	content: "\32";
@@ -401,5 +403,14 @@ you can use the generic selector below, but it's slower:
 font-family:'icomoon';
 }
 
-
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
 
