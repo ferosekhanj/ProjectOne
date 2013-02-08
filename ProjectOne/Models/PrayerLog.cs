@@ -26,7 +26,7 @@ namespace ProjectOne.Models
             Month = theMonth;
             UserId = theUserId;
             Completed = false;
-            Details = new PrayerLogDetail { Id = -1 };
+            Details = new PrayerLogDetail { PrayerLogId = -1 };
         }
 
         public bool IsCompleted(int theDay, int theSalah)

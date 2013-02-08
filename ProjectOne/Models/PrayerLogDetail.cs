@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -16,7 +17,7 @@ namespace ProjectOne.Models
     public class PrayerLogDetail
     {
         int[] myDetails = new int[5];
-        public int Id { get; set; }
+        public int PrayerLogId { get; set; }
         public int Subuh 
         { 
             get
@@ -73,6 +74,8 @@ namespace ProjectOne.Models
             }
         }
 
+        public PrayerLog MyLog { get; set; }
+
         public bool GetStatus(int theDay,int theSalah)
         {
             return (myDetails[theSalah] & (1 << (theDay - 1))) > 0;
@@ -99,7 +102,7 @@ namespace ProjectOne.Models
             return NumberOfSetBits(myDetails[theSalah]);
         }
 
-        int NumberOfSetBits(int i)
+        private int NumberOfSetBits(int i)
         {
             i = i - ((i >> 1) & 0x55555555);
             i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
