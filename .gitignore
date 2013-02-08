@@ -11,8 +11,11 @@
 *.suo
 *.user
 # Include dlls if they’re in the NuGet packages directory
-!/packages/*/lib/*.dll
-!/packages/*/lib/*/*.dll
+#[commented since nuget supports package restore now ignore the entire folder
+#!/packages/*/lib/*.dll 
+#!/packages/*/lib/*/*.dll
+packages/
+#]
 # Include dlls if they're in the CommonReferences directory
 !*CommonReferences/*.dll
 ####################
