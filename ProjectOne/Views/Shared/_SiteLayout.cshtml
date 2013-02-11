@@ -17,9 +17,8 @@
 </header>
 <nav class="floatright" >
 <ul>
-<li>@Html.ActionLink("HOME","Index")</li>
-<li>@Html.ActionLink("LOGIN","Login")</li>
-<li>@Html.ActionLink("ABOUT","Index","Log")</li>
+<li><span aria-hidden="true" class="icons icon-home"> </span>@Html.ActionLink("HOME","Index","Home")</li>
+<li><span aria-hidden="true" class="icons icon-key-stroke "> </span>@Html.ActionLink("LOGIN","Login","Account")</li>
 </ul>
 </nav>
 <div class="section group">
@@ -28,7 +27,7 @@
         @RenderBody()
 <hr/>
 <footer>
-&#169; @DateTime.Now.Year | Contact us | Terms of use| Privacy Policy
+&#169; @DateTime.Now.Year | Contact us | Terms of use| Privacy Policy|@Html.ActionLink("About","Index","Log")
 </footer>
 </div>
 </body>

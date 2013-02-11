@@ -1,0 +1,35 @@
+﻿@model ProjectOne.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+<section>
+<h1>Login</h1>
+@using ( Html.BeginForm("Login"))
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary()
+<fieldset>
+<legend>Enter user credentials.</legend>
+<ol>
+            <li>
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m => m.Username, new {placeholder="Enter your user name" ,required=""})
+                @Html.ValidationMessageFor(m => m.Username)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new {placeholder="Enter your password" ,required=""})
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </li>
+            <li>
+                <input type="submit" value="Login" />
+            </li>
+</ol>
+</fieldset>
+}
+</section>

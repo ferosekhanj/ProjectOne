@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ProjectOne.Controllers
 {
+    [Authorize]
     public class ReviewController : Controller
     {
         //

@@ -18,9 +18,11 @@
 <nav class="floatright">
 <h1 class="visuallyhidden">Site navigation links</h1>
 <ul>
+<li><span aria-hidden="true" class="icons icon-user"> </span>@Html.ActionLink(@WebSecurity.CurrentUserName,"Account","Profile")</li>
 <li><span aria-hidden="true" class="icons icon-pencil"> </span>@Html.ActionLink("LOG","Index","Log")</li>
 <li><span aria-hidden="true" class="icons icon-bars"> </span>@Html.ActionLink("REVIEW", "Month", "Review")</li>
 <li><span aria-hidden="true" class="icons icon-history"> </span>@Html.ActionLink("MAKEUP", "List", "Makeup")</li>
+<li><span aria-hidden="true" class="icons icon-arrow-right"></span>@Html.ActionLink("LOGOUT", "Logout", "Account")</li>
 </ul>
 </nav>
 <div class="section group">

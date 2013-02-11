@@ -1,0 +1,36 @@
+﻿@model ProjectOne.ViewModels.SignupViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+<section>
+<h1>Signup</h1>
+@using ( Html.BeginForm("Signup","Account"))
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary()
+<fieldset>
+<legend>Enter user credentials.</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m=>m.Username , new {placeholder="Enter user name" ,required=""})
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.Password)
+                @Html.PasswordFor(m=>m.Password, new {placeholder="Enter password", required="" })
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.ConfirmPassword)
+                @Html.PasswordFor(m=>m.ConfirmPassword,new {placeholder="Confirm password",required="" })
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.Email)
+                @Html.TextBoxFor(m=>m.Email , new {placeholder="We wont spam your mail",required="",type="email" })
+            <br />
+            <input type="submit" value="Signup" />
+            </li>
+        </ol>
+</fieldset>
+}
+</section>

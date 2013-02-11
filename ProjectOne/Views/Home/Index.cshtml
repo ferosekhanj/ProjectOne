@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ProjectOne.ViewModels.SignupViewModel
+@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
@@ -15,26 +16,34 @@
     </article>
     <article class="col span_1_of_2">
         <h1>Interested signup in a minute.</h1>
-        <form>
-    <fieldset>
+@using ( Html.BeginForm("Signup","Account"))
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary()
+   <fieldset>
         <legend>Register a new account.</legend>
         <ol>
             <li>
-            <label for="username">Username</label><input name="username" type="text" placeholder="Select a username" required />
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m=>m.Username , new {placeholder="Enter user name" ,required=""})
             </li>
             <li>
-            <label for="password">Password</label><input name="password" type="password" placeholder="Select a password" required/>
+                @Html.LabelFor(m=>m.Password)
+                @Html.PasswordFor(m=>m.Password, new {placeholder="Enter password",required="" })
             </li>
             <li>
-            <label for="password">Retype Password</label><input name="password" type="password" placeholder="Select a password" required/>
+                @Html.LabelFor(m=>m.ConfirmPassword)
+                @Html.PasswordFor(m=>m.ConfirmPassword,new {placeholder="Confirm password",required="" })
             </li>
             <li>
-            <label for="email">Email</label><input name="email" type="email" placeholder="We wont spam your mail" required/><br />
+                @Html.LabelFor(m=>m.Email)
+                @Html.TextBoxFor(m=>m.Email , new {placeholder="We wont spam your mail",required="",type="email" })
+            <br />
             <input type="submit" value="Signup" />
             </li>
         </ol>
     </fieldset>
-    </form>
+}
     </article>
 </div>
 <div class="section group">

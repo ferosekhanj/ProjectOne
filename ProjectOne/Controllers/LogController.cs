@@ -8,6 +8,7 @@ using ProjectOne.Models;
 
 namespace ProjectOne.Controllers
 {
+    [Authorize]
     public class LogController : Controller
     {
         //
