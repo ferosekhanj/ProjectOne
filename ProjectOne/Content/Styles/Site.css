@@ -335,7 +335,7 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"]:before {
 */
-.icon-zohar:before, .icon-subuh:before, .icon-asr:before, .icon-key-stroke:before, .icon-magrib:before, .icon-isha:before, .icon-pencil:before, .icon-home:before, .icon-calendar:before, .icon-calendar-2:before, .icon-checkbox-checked:before, .icon-checkbox-unchecked:before, .icon-history:before, .icon-busy:before, .icon-spinner:before, .icon-user:before, .icon-bars:before, .icon-untitled:before, .icon-arrow-left:before {
+.icon-zohar:before, .icon-subuh:before, .icon-asr:before, .icon-key-stroke:before, .icon-magrib:before, .icon-isha:before, .icon-pencil:before, .icon-home:before, .icon-calendar:before, .icon-calendar-2:before, .icon-checkbox-checked:before, .icon-checkbox-unchecked:before, .icon-history:before, .icon-busy:before, .icon-spinner:before, .icon-user:before, .icon-bars:before, .icon-arrow-right:before, .icon-arrow-left:before {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
