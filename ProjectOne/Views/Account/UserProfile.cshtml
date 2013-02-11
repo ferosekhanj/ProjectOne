@@ -1,0 +1,40 @@
+﻿@model ProjectOne.ViewModels.UserProfileViewModel
+@{
+    ViewBag.Title = "Edit Profile";
+}
+<section>
+<h1>Edit Profile</h1>
+<p>You can change your profile data here. Edit only those values that you want to change.</p>
+
+@using ( Html.BeginForm("UserProfile","Account"))
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary()
+<fieldset>
+<legend>Edit Profile Data.</legend>
+        <ol>
+            <li>
+                <label>You joined us site on</label>@Model.CreatedOn.ToShortDateString()
+            </li>
+            <li>
+                @Html.LabelFor(m => m.OldPassword)
+                @Html.PasswordFor(m=>m.OldPassword , new {placeholder="Enter current password"})
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.NewPassword)
+                @Html.PasswordFor(m=>m.NewPassword, new {placeholder="Enter new password"})
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.ConfirmPassword)
+                @Html.PasswordFor(m=>m.ConfirmPassword,new {placeholder="Retype new password"})
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.Email)
+                @Html.TextBoxFor(m=>m.Email , new {type="email" })
+            <br />
+            <input type="submit" value="Save" />
+            </li>
+        </ol>
+</fieldset>
+}
+</section>

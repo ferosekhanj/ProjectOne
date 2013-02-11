@@ -121,6 +121,7 @@
     <Compile Include="Controllers\MakeupController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="ViewModels\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\Common.cs" />
     <Compile Include="Models\PrayerLog.cs" />
     <Compile Include="Models\PrayerLogDetail.cs" />
@@ -195,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Logout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\UserProfile.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

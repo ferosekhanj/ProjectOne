@@ -1,4 +1,5 @@
-﻿using ProjectOne.ViewModels;
+﻿using ProjectOne.Models;
+using ProjectOne.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ using WebMatrix.WebData;
 
 namespace ProjectOne.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
-
         //
         // GET: /Account/Login
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
@@ -37,7 +39,7 @@ namespace ProjectOne.Controllers
         }
 
         //
-        // POST: /Account/
+        // POST: /Account/Signup
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -68,6 +70,47 @@ namespace ProjectOne.Controllers
             return View();
         }
 
+        //
+        // GET: /Account/Profile
+        public ActionResult UserProfile()
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                UserProfileViewModel pvm = new UserProfileViewModel();
+                pvm.Load(db);
+                return View(pvm);
+            }
+        }
+
+        //
+        // POST: /Account/Profile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserProfile(UserProfileViewModel theFormData)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(theFormData.OldPassword) 
+                    && !string.IsNullOrEmpty(theFormData.NewPassword) 
+                    && !string.IsNullOrEmpty(theFormData.ConfirmPassword))
+                {
+                    try
+                    {
+                        WebSecurity.ChangePassword(WebSecurity.CurrentUserName, theFormData.OldPassword, theFormData.NewPassword);
+                    }
+                    catch (MembershipCreateUserException e)
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    }
+                }
+                using (DatabaseContext db = new DatabaseContext())
+                {
+                    theFormData.Save(db);
+                }
+
+            }
+            return View(theFormData);
+        }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
