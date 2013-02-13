@@ -18,6 +18,9 @@ namespace ProjectOne.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            if (WebSecurity.IsAuthenticated)
+                return RedirectToAction("Index", "Log");
+
             return View();
         }
 
