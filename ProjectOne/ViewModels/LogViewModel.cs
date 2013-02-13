@@ -141,6 +141,7 @@ namespace ProjectOne.ViewModels
                 }
             }
             Repository.AddOrUpdate(aLog);
+            Repository.Save();
         }
         bool[] mySalahStatus;
 

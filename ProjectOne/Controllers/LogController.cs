@@ -36,7 +36,6 @@ namespace ProjectOne.Controllers
                 {
                     theModel.Repository = aRepository;
                     theModel.SaveData();
-                    aRepository.Save();
                 }
                 return View("Index", theModel);
             }

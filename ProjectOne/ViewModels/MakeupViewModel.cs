@@ -136,6 +136,7 @@ namespace ProjectOne.ViewModels
             }
             // commit the active log
             Repository.AddOrUpdate(aLog);
+            Repository.Save();
         }
     }
 }
