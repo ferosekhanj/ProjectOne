@@ -1,6 +1,8 @@
 ﻿@model ProjectOne.ViewModels.UserProfileViewModel
 @{
     ViewBag.Title = "Edit Profile";
+    var aTimeZones = TimeZoneInfo.GetSystemTimeZones();
+    var aSelectionList = from a in aTimeZones select new SelectListItem { Text = a.DisplayName, Value = a.Id, Selected = (a.Id == Model.Timezone) };
 }
 <section>
 <h1>Edit Profile</h1>
@@ -13,9 +15,6 @@
 <fieldset>
 <legend>Edit Profile Data.</legend>
         <ol>
-            <li>
-                <label>You joined us site on</label>@Model.CreatedOn.ToShortDateString()
-            </li>
             <li>
                 @Html.LabelFor(m => m.OldPassword)
                 @Html.PasswordFor(m=>m.OldPassword , new {placeholder="Enter current password"})
@@ -31,6 +30,10 @@
             <li>
                 @Html.LabelFor(m=>m.Email)
                 @Html.TextBoxFor(m=>m.Email , new {type="email" })
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.Timezone)
+                @Html.DropDownListFor(m => m.Timezone, aSelectionList)
             <br />
             <input type="submit" value="Save" />
             </li>

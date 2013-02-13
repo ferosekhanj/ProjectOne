@@ -22,6 +22,7 @@ namespace ProjectOne.Models
     /// </summary>
     public class PrayerLogRepository :IPrayerLogRepository
     {
+        bool myOwnDB;
         DatabaseContext myDB;
 
         /// <summary>
@@ -30,6 +31,15 @@ namespace ProjectOne.Models
         public PrayerLogRepository()
         {
             myDB = new DatabaseContext();
+            myOwnDB = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public PrayerLogRepository(DatabaseContext theContext)
+        {
+            myDB = theContext;
         }
         
         public PrayerLog Find(int theYear, int theMonth, int theUserId)
@@ -77,7 +87,9 @@ namespace ProjectOne.Models
 
         public void Dispose()
         {
-            myDB.Dispose();
+            if (myOwnDB && myDB != null)
+                myDB.Dispose();
+            myDB = null;
         }
     }
 }

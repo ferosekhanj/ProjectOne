@@ -5,6 +5,17 @@
 }
 <section>
 <h1>Makeup missed prayers</h1>
+@if(Model.SalahDate.Count==0)
+{ 
+<div class="section group">
+<blockquote class="col span_4_of_5">
+    "Masha ALLAH!! You have completed all your prayers as on today. God bless you."
+    <cite>--MySalah.com</cite>
+</blockquote>
+</div>
+}
+@if( Model.SalahDate.Count!=0)
+{
 <div  class="section group">
 <div class="col span_3_of_3">
 @using(var f = Html.BeginForm("Save","Makeup"))
@@ -48,4 +59,5 @@
 }
 </div>
 </div>
+}
 </section>

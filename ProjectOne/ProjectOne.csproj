@@ -121,6 +121,7 @@
     <Compile Include="Controllers\MakeupController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="Models\UserProfileRepository.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\Common.cs" />
     <Compile Include="Models\PrayerLog.cs" />

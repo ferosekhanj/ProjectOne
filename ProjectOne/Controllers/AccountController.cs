@@ -53,7 +53,7 @@ namespace ProjectOne.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(theFormData.Username, theFormData.Password, new { Email = theFormData.Email, Active = true }, false);
+                    WebSecurity.CreateUserAndAccount(theFormData.Username, theFormData.Password, new { Email = theFormData.Email, Active = true, Timezone=Common.CalculateTimezoneFromOffset(theFormData.TimezoneOffset) }, false);
                     WebSecurity.Login(theFormData.Username, theFormData.Password);
                     return RedirectToAction("Index", "Log");
                 }
@@ -77,10 +77,11 @@ namespace ProjectOne.Controllers
         // GET: /Account/Profile
         public ActionResult UserProfile()
         {
-            using (DatabaseContext db = new DatabaseContext())
+            using (IUserProfileRepository r = new UserProfileRepository(WebSecurity.CurrentUserId))
             {
                 UserProfileViewModel pvm = new UserProfileViewModel();
-                pvm.Load(db);
+                pvm.Repository = r;
+                pvm.Load();
                 return View(pvm);
             }
         }
@@ -106,9 +107,10 @@ namespace ProjectOne.Controllers
                         ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                     }
                 }
-                using (DatabaseContext db = new DatabaseContext())
+                using (IUserProfileRepository r = new UserProfileRepository(WebSecurity.CurrentUserId))
                 {
-                    theFormData.Save(db);
+                    theFormData.Repository = r;
+                    theFormData.Save();
                 }
 
             }

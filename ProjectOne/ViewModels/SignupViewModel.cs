@@ -26,5 +26,9 @@ namespace ProjectOne.ViewModels
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "TimezoneOffset")]
+        public double TimezoneOffset { get; set; }
     }
 }

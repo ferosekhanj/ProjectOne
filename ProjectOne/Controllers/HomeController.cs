@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectOne.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,7 @@ namespace ProjectOne.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(new SignupViewModel { TimezoneOffset = 0.0 });
         }
 
         //

@@ -20,6 +20,7 @@
 {
 @Html.AntiForgeryToken()
 @Html.ValidationSummary()
+@Html.HiddenFor(m=>m.TimezoneOffset,new { Id="TimezoneOffset"})
    <fieldset>
         <legend>Register a new account.</legend>
         <ol>
@@ -53,3 +54,8 @@
 </blockquote>
 </div>
 </section>
+<script>
+document.body.onload = function (){
+    document.getElementById("TimezoneOffset").value = new Date().getTimezoneOffset();
+}
+</script>

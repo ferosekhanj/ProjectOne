@@ -9,6 +9,7 @@
 {
 @Html.AntiForgeryToken()
 @Html.ValidationSummary()
+@Html.HiddenFor(m => m.TimezoneOffset, new { Id="TimezoneOffset"})
 <fieldset>
 <legend>Enter user credentials.</legend>
         <ol>

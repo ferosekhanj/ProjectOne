@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebMatrix.WebData;
 
 namespace ProjectOne.ViewModels
 {
@@ -49,8 +50,7 @@ namespace ProjectOne.ViewModels
 
         private void FetchData(int theYear)
         {
-            //TODO: Fetch this from the login session
-            int aCurrentUserId = 0;
+            int aCurrentUserId = WebSecurity.CurrentUserId;
 
             IEnumerable<PrayerLog> logs = Repository.Find(theYear, aCurrentUserId);
             foreach (var log in logs)
@@ -71,8 +71,7 @@ namespace ProjectOne.ViewModels
 
         private void FetchData(int theYear, int theMonth)
         {
-            //TODO: Fetch this from the login session
-            int aCurrentUserId = 0;
+            int aCurrentUserId = WebSecurity.CurrentUserId;
 
             PrayerLog log = Repository.Find(theYear, theMonth, aCurrentUserId);
             for (int day = 0; day < ItemCount.Length; day++)

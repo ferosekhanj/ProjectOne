@@ -14,5 +14,6 @@ namespace ProjectOne.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public bool Active { get; set; }
+        public string Timezone { get; set; }
     }
 }

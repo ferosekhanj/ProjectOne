@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ProjectOne.Models;
+using WebMatrix.WebData;
 
 namespace ProjectOne.ViewModels
 {
@@ -100,11 +101,9 @@ namespace ProjectOne.ViewModels
         public void LoadData()
         {
             mySalahStatus = new bool[35];
+            int aCurrentUserId = WebSecurity.CurrentUserId;
 
-            //TODO: Fetch this from the login session
-            int aCurrentUserId = 0;
             // Fetch the status for the week
-
             PrayerLog aLog = Repository.Find(StartDate.Year, StartDate.Month, aCurrentUserId);
             int i = 0;
             for (DateTime d = myStartDate; d < myEndDate; d = d.AddDays(1), i++)
@@ -122,8 +121,8 @@ namespace ProjectOne.ViewModels
         }
         public void SaveData()
         {
-            //TODO: Fetch this from the login session
-            int aCurrentUserId = 0;
+            int aCurrentUserId = WebSecurity.CurrentUserId;
+
             // Save the status for the week
             PrayerLog aLog = Repository.Find(StartDate.Year, StartDate.Month, aCurrentUserId);
             int i = 0;

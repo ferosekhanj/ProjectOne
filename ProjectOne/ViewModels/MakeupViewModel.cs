@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ProjectOne.Models;
+using WebMatrix.WebData;
 
 namespace ProjectOne.ViewModels
 {
@@ -28,6 +29,7 @@ namespace ProjectOne.ViewModels
 
         public IPrayerLogRepository Repository { get; set; }
 
+
         /// <summary>
         /// Empty constructor
         /// </summary>
@@ -40,10 +42,10 @@ namespace ProjectOne.ViewModels
         /// <summary>
         /// Fetch the data from the database
         /// </summary>
-        public void LoadData()
+        public void LoadData(string theUserTimezoneId)
         {
-            //TODO: Fetch this from the login session
-            int aCurrentUserId = 0;
+            DateTime aToday = Common.GetTodayInTimezone(theUserTimezoneId);
+            int aCurrentUserId = WebSecurity.CurrentUserId;
             IEnumerable<PrayerLog> aLogs = Repository.Find(aCurrentUserId);
 
             bool bCheckMissingMonth = false;
@@ -58,7 +60,7 @@ namespace ProjectOne.ViewModels
                 {
                     // a record is missing for the month
                     aLog = new PrayerLog(aNextMonth.Year, aNextMonth.Month, aCurrentUserId);
-                    if (FindOpenPrayers(aLog))
+                    if (FindOpenPrayers(aLog,aToday))
                     {
                         return;
                     }
@@ -68,7 +70,7 @@ namespace ProjectOne.ViewModels
                     aLog = log;
                 }
 
-                if (FindOpenPrayers(aLog))
+                if (FindOpenPrayers(aLog,aToday))
                 {
                     break;
                 }
@@ -77,14 +79,14 @@ namespace ProjectOne.ViewModels
             }
 
         }
-        private bool FindOpenPrayers(PrayerLog log)
+        private bool FindOpenPrayers(PrayerLog log,DateTime today)
         {
             if (log.Completed)
             {
                 return false;
             }
-            DateTime aDay = new DateTime(log.Year, log.Month, 1);
-            for (int i = 1; i <= DateTime.DaysInMonth(aDay.Year, aDay.Month); i++)
+            DateTime aDay = new DateTime(log.Year, log.Month, 1,23,59,59);
+            for (int i = 1; i <= DateTime.DaysInMonth(aDay.Year, aDay.Month) && aDay<today ; i++)
             {
                 bool aFound = false;
                 bool[] aStatus = new bool[5];
@@ -110,8 +112,7 @@ namespace ProjectOne.ViewModels
         }
         public void SaveData()
         {
-            //TODO: Fetch this from the login session
-            int aCurrentUserId = 0;
+            int aCurrentUserId = WebSecurity.CurrentUserId;
             // Save the status for the week
             PrayerLog aLog = null;
 

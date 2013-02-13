@@ -27,25 +27,32 @@ namespace ProjectOne.ViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        [Display(Name = "Timezone")]
+        public string Timezone { get; set; }
+
+        /// <summary>
+        /// The repository to use for saving and loading data.
+        /// </summary>
+        public IUserProfileRepository Repository { get; set; }
 
         public UserProfileViewModel()
         {
 
         }
 
-        public void Load(DatabaseContext theDB)
+        public void Load()
         {
-            UserProfile aProfile =  theDB.UserProfiles.Find(WebSecurity.CurrentUserId);
+            UserProfile aProfile =  Repository.UserProfile;
             Email       = aProfile.Email;
-            CreatedOn   = WebSecurity.GetCreateDate(WebSecurity.CurrentUserName);
+            Timezone    = aProfile.Timezone;
         }
 
-        public void Save(DatabaseContext theDB)
+        public void Save()
         {
-            UserProfile aProfile =  theDB.UserProfiles.Find(WebSecurity.CurrentUserId);
+            UserProfile aProfile =  Repository.UserProfile;
             aProfile.Email = Email;
-            theDB.SaveChanges();
+            aProfile.Timezone = Timezone;
+            Repository.Save();
         }
     }
 }
