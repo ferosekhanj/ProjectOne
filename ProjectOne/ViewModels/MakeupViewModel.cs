@@ -12,6 +12,9 @@ namespace ProjectOne.ViewModels
     /// </summary>
     public class MakeupViewModel
     {
+        /// <summary>
+        /// The days with open prayers
+        /// </summary>
         public IList<DateTime> SalahDate
         {
             get;
@@ -27,6 +30,9 @@ namespace ProjectOne.ViewModels
             set;
         }
 
+        /// <summary>
+        /// The repository to use for saving and loading data.
+        /// </summary>
         public IPrayerLogRepository Repository { get; set; }
 
 
@@ -49,13 +55,14 @@ namespace ProjectOne.ViewModels
             IEnumerable<PrayerLog> aLogs = Repository.Find(aCurrentUserId);
 
             bool bCheckMissingMonth = false;
-            DateTime aNextMonth = DateTime.Now;
+            DateTime aNextMonth = aToday;
             foreach (var log in aLogs)
             {
                 PrayerLog aLog = log;
 
-                // Check if there is a break in the db records.
                 // we dont store the records for months which doesn't have atleast one completed prayer
+                // If the next month from db is not equal to the expected next month
+                // Then add those months as in complete prayers.
                 while (bCheckMissingMonth && (aNextMonth.Year != aLog.Year || aNextMonth.Month != aLog.Month))
                 {
                     // a record is missing for the month
@@ -72,13 +79,32 @@ namespace ProjectOne.ViewModels
 
                 if (FindOpenPrayers(aLog,aToday))
                 {
-                    break;
+                    return;
                 }
+
+                // Expected next month from the current month
                 aNextMonth = new DateTime(aLog.Year, aLog.Month, 1).AddMonths(1);
                 bCheckMissingMonth = true;
             }
 
+            // If the user has not entered any data during the last set of months. Then include them too.
+            while (aNextMonth < aToday)
+            {
+                if (FindOpenPrayers(new PrayerLog(aNextMonth.Year,aNextMonth.Month,aCurrentUserId),aToday))
+                {
+                    return;
+                }
+                aNextMonth = aNextMonth.AddMonths(1);
+            }
+
         }
+
+        /// <summary>
+        /// Find the days when the prayers are not caclulated.
+        /// </summary>
+        /// <param name="log"></param>
+        /// <param name="today"></param>
+        /// <returns></returns>
         private bool FindOpenPrayers(PrayerLog log,DateTime today)
         {
             if (log.Completed)
@@ -103,7 +129,7 @@ namespace ProjectOne.ViewModels
                     {
                         SalahStatus.Add(aStatus[j]);
                     }
-                    if (SalahDate.Count >= 7)
+                    if (SalahDate.Count >= MAX_MISSING_PRAYER)
                         return true;
                 }
                 aDay = aDay.AddDays(1);
@@ -139,5 +165,7 @@ namespace ProjectOne.ViewModels
             Repository.AddOrUpdate(aLog);
             Repository.Save();
         }
+
+        private const int MAX_MISSING_PRAYER = 7;
     }
 }
