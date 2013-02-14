@@ -14,10 +14,20 @@ namespace ProjectOne.Models
         public static int MAGRIB = 3;
         public static int ISHA = 4;
     }
+
+    /// <summary>
+    /// The status of individual parayer for a single day.
+    /// The individual salh properties are required for storing the data to db.
+    /// </summary>
     public class PrayerLogDetail
     {
         int[] myDetails = new int[5];
+
+        /// <summary>
+        /// This identifies the related prayer log.
+        /// </summary>
         public int PrayerLogId { get; set; }
+
         public int Subuh 
         { 
             get
@@ -74,13 +84,28 @@ namespace ProjectOne.Models
             }
         }
 
+        /// <summary>
+        /// The related prayer log
+        /// </summary>
         public PrayerLog MyLog { get; set; }
 
+        /// <summary>
+        /// Find the status of a particular prayer on a particular day.
+        /// </summary>
+        /// <param name="theDay">Day</param>
+        /// <param name="theSalah">Salah</param>
+        /// <returns>Completion Status</returns>
         public bool GetStatus(int theDay,int theSalah)
         {
             return (myDetails[theSalah] & (1 << (theDay - 1))) > 0;
         }
 
+        /// <summary>
+        /// Set the status of a particular prayer on a particular day.
+        /// </summary>
+        /// <param name="theDay">Day</param>
+        /// <param name="theSalah">Salah</param>
+        /// <param name="theStatus">Status</param>
         public void SetStatus(int theDay, int theSalah, bool theStatus)
         {
             if( theStatus) 
@@ -89,6 +114,11 @@ namespace ProjectOne.Models
                 myDetails[theSalah] &= ~(1 << (theDay - 1));
         }
 
+        /// <summary>
+        /// Check whether all the prayers are marked complete
+        /// </summary>
+        /// <param name="theCount">Number of days</param>
+        /// <returns>Status</returns>
         public bool IsAllCompleted(int theCount)
         {
             int aMaxValue = (theCount==31)? 0x7fffffff: (1<<theCount)-1;
@@ -97,11 +127,23 @@ namespace ProjectOne.Models
             return i > Waqt.ISHA;
         }
 
+        /// <summary>
+        /// Count the days a particular prayer hsa been completed
+        /// </summary>
+        /// <param name="theSalah"></param>
+        /// <returns></returns>
         public int GetCount(int theSalah)
         {
             return NumberOfSetBits(myDetails[theSalah]);
         }
 
+        /// <summary>
+        /// Based on http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel
+        /// This just works
+        /// Its majic ;-)
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         private int NumberOfSetBits(int i)
         {
             i = i - ((i >> 1) & 0x55555555);

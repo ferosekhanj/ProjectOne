@@ -11,12 +11,19 @@ namespace ProjectOne.Models
         void Save();
     }
 
+    /// <summary>
+    /// Finds a particular user data stored in the app db.
+    /// </summary>
     public class UserProfileRepository : IUserProfileRepository
     {
         bool myOwnDB;
         DatabaseContext myDB;
         int myUserId;
 
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="theUserId"></param>
         public UserProfileRepository(int theUserId)
         {
             myDB = new DatabaseContext();
@@ -24,6 +31,11 @@ namespace ProjectOne.Models
             myUserId = theUserId;
         }
 
+        /// <summary>
+        /// Construct using an external DbContext
+        /// </summary>
+        /// <param name="theUserId"></param>
+        /// <param name="theDB"></param>
         public UserProfileRepository(int theUserId, DatabaseContext theDB)
         {
             myDB = theDB;
@@ -48,11 +60,17 @@ namespace ProjectOne.Models
             }
         }
 
+        /// <summary>
+        /// Save the changes to db
+        /// </summary>
         public void Save()
         {
             myDB.SaveChanges();
         }
 
+        /// <summary>
+        /// Dispose if we own the db
+        /// </summary>
         public void Dispose()
         {
             if(myOwnDB && myDB !=null)

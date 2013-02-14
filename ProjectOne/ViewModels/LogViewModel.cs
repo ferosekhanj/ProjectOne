@@ -119,6 +119,10 @@ namespace ProjectOne.ViewModels
                 }
             }
         }
+
+        /// <summary>
+        /// Save the data to the database
+        /// </summary>
         public void SaveData()
         {
             int aCurrentUserId = WebSecurity.CurrentUserId;
