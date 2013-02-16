@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ProjectOne.Models;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -14,8 +11,12 @@ namespace ProjectOne
     {
         protected void Application_Start()
         {
+            // Initialize before the membership provider creates the tables
+            using (var d = new DatabaseContext())
+            {
+                d.Database.Initialize(false);
+            }
             AreaRegistration.RegisterAllAreas();
-
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

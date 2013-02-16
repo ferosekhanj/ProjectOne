@@ -7,7 +7,8 @@ namespace ProjectOne
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+           // Since we are using elmah.mvc this is not required
+           // filters.Add(new HandleErrorAttribute());
         }
     }
 }

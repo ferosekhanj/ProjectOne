@@ -1,10 +1,4 @@
-﻿using ProjectOne.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Web;
+﻿using System;
 using WebMatrix.WebData;
 
 namespace ProjectOne
@@ -13,19 +7,8 @@ namespace ProjectOne
     {
         public static void RegisterDatabase()
         {
-            Database.SetInitializer<DatabaseContext>(null);
-
             try
             {
-                using (var context = new DatabaseContext())
-                {
-                    if (!context.Database.Exists())
-                    {
-                        // Create the SimpleMembership database without Entity Framework migration schema
-                        ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
-                    }
-                }
-
                 WebSecurity.InitializeDatabaseConnection("ProjectOneDatabase", "UserProfiles", "Id", "Name", autoCreateTables: true);
             }
             catch (Exception ex)
