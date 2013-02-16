@@ -30,42 +30,19 @@
 .colfirst, .col:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
 
 /*  GRID OF THREE   ============================================================================= */
-.span_5_of_5 {
-	width: 100%;
-}
-
-.span_4_of_5 {
-  	width: 79.68%; 
-}
-
-.span_3_of_5 {
-  	width: 59.36%; 
-}
-
-.span_2_of_5 {
-  	width: 39.04%;
+	
+.span_3_of_3 {
+	width: 100%; 
 }
 
 .span_1_of_5 {
   	width: 18.72%;
 }
 
-	
-.span_3_of_3 {
-	width: 100%; 
-}
-
-.span_2_of_3 {
-	width: 66.1%; 
-}
-
 .span_1_of_3 {
 	width: 32.2%; 
 }
 
-.span_2_of_2 {
-	width: 100%;
-}
 
 .span_1_of_2 {
 	width: 49.2%;
@@ -78,37 +55,7 @@
 		margin: 1% 0 1% 0%;
 	}
 
-	.span_5_of_5 {
-		width: 100%; 
-	}
-	.span_4_of_5 {
-		width: 100%; 
-	}
-	.span_3_of_5 {
-		width: 100%; 
-	}
-	.span_2_of_5 {
-		width: 100%; 
-	}
-	.span_1_of_5 {
-		width: 100%; 
-	}
-    .span_3_of_3 {
-        width: 100%;
-    }
-
-    .span_2_of_3 {
-        width: 100%;
-    }
-
-    .span_1_of_3 {
-        width: 100%;
-    }
-
-	.span_2_of_2 {
-		width: 100%; 
-	}
-	.span_1_of_2 {
+	.span_1_of_2 ,.span_1_of_3,.span_3_of_3,.span_1_of_5 {
 		width: 100%; 
 	}
 }

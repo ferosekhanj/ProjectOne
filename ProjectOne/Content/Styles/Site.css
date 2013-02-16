@@ -1,7 +1,7 @@
 ﻿body { 
 margin : 0 auto;
 padding : 0;
-font : 100%/1.4 'Droid Serif','Arvo', serif; 	
+font-family : 'Droid Serif', serif; 	
 color : #000; 
 background-color:#eee;
 }
@@ -15,9 +15,10 @@ background-color:#eee;
 header, footer, section,article {
     display: block;
 }
+
 nav ul{
     list-style-type:none;
-    padding-left:0px;
+    padding-left:0;
 }
 
 nav ul li {
@@ -30,12 +31,12 @@ nav ul li:last-child {
     border-right: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-font-family:'Oswald','Roboto Condensed','Droid Sans',verdana, arial, helvetica, helve, sans-serif;
+h1, h2 {
+font-family:'Oswald',verdana, arial, helvetica, helve, sans-serif;
 color: rgb(51,153,51);
 font-weight:normal;
-margin:0px;
-padding:0px;
+margin:0;
+padding:0;
 }
 header h1 
 {
@@ -57,6 +58,7 @@ font-size:75%;
 .floatright {
     float:right;
 }
+
 blockquote {
 font-family: Georgia, serif;
 font-size: 18px;
@@ -74,27 +76,24 @@ cite {
 
 table { 
     border-collapse : collapse;
-    border-spacing : 0px;
+    border-spacing : 0;
     margin-bottom : 1.4em; 
     width : 100%; 
 }
-tr.tr0 {
-    background-color:whitesmoke/*rgb(219,238,243)*/;
+.tr0 {
+    background-color:#e2e2e2;
 }
 
-tr.tr1 {
+.tr1 {
     background-color:white;
 }
+
 tr {
-border:1px solid lightGray/*rgb(75,172,198)*/;
+border:1px solid lightGray;
 }
 
 th, td, caption { 
 padding : .25em 10px .25em 5px; 
-}
-
-tfoot { 
-    font-style : italic; 
 }
 
 caption { 
@@ -104,20 +103,22 @@ background-color : transparent;
 thead th {
     text-align:center;
 }
+
 td {
     text-align:center;
     width:44px;
     height:44px;
 }
 
-table.reviewtable {
+.reviewtable {
     background-color:whitesmoke;
 }
 
-table.reviewtable tr{
+.reviewtable tr{
     border:none;
 }
-table.reviewtable td{
+
+.reviewtable td{
     padding:2px;
 }
 
@@ -125,8 +126,8 @@ table.reviewtable td{
 
 fieldset {
     border: none;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 fieldset legend {
@@ -147,7 +148,7 @@ label {
     font-size: 110%;
 }
 
-label.checkbox {
+.checkbox {
     display: inline;
 }
 
@@ -183,7 +184,7 @@ button.small {
     font-size: 90%;
     width:auto;
     padding:5px;
-    margin:0px;
+    margin:0;
 }
 
 input[type="submit"],
@@ -214,6 +215,7 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+
 .progresscircle {
     width: 100%;
     height: 100%;
@@ -261,16 +263,12 @@ font-weight:bold;
         margin-bottom:5px;
     }
 }
-@media only screen and (min-width: 960px) {
-    .moredata {
-        display:inline;
-    }
-}
+
 @media only screen and (max-width: 480px) {
     blockquote {
         font-family: Georgia, serif;
         font-style: italic;
-        margin: 0px;
+        margin: 0;
         padding: 5px;
         line-height: 1.45;
         color: #383838;
@@ -299,12 +297,18 @@ font-weight:bold;
         text-align:left;
     }
     body { 
-        font : 75%/1.0 ; 	
+        font-family : 'Droid Serif', serif; 	
+        font-size:100%;
     }
     a, a:visited, a:hover, a:link {
         color:rgb(0,122,204);
         text-decoration:none;
-        font-size:small;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .moredata {
+        display:inline;
     }
 }
 
@@ -401,6 +405,7 @@ you can use the generic selector below, but it's slower:
 .icon-arrow-left:before {
 	content: "\3c";
 }
+
 .wb {
 font-family:'icomoon';
 }
