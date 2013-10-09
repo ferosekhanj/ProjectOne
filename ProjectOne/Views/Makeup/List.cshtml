@@ -20,11 +20,12 @@
 <div class="col span_3_of_3">
 @using(var f = Html.BeginForm("Save","Makeup"))
 {
+<input type="submit" value="Save Changes" class="small"/>
+<input type="reset" value="Undo Changes" class="small"/>
 <table> 
 <thead>
 <tr>
 <th colspan="7">
-<input type="submit" value="Save" class="small floatright"/>
 </th>
 </tr>
 <tr>

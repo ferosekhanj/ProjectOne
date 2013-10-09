@@ -178,6 +178,7 @@ input[type="checkbox"] {
     width: auto;
 }
 
+input[type="reset"].small,
 input[type="submit"].small,
 input[type="button"].small,
 button.small {
@@ -187,6 +188,7 @@ button.small {
     margin:0;
 }
 
+input[type="reset"],
 input[type="submit"],
 input[type="button"],
 button {

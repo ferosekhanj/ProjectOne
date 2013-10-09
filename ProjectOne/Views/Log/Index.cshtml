@@ -7,12 +7,12 @@
     var next  = Model.EndDate.AddDays(1.0);
 }
 <script>
-    function checkAll() {
-        var inputs = document.getElementsByTagName("input");
-        for(var i=0;i< inputs.length;i++)
+    function checkAll(st,en)
+    {
+        for(var i=st;i< en;i++)
         {
-            if (inputs[i].type == "checkbox")
-                inputs[i].checked = true;
+            var input = document.getElementById("SalahStatus_"+i+"_");
+            input.checked = true;
         }
     }
 </script>
@@ -24,17 +24,18 @@
 {
     @Html.HiddenFor(o=>o.StartDate)
     @Html.HiddenFor(o=>o.EndDate)
+<input type="reset" value="Undo Changes" class="small"/>
+<input type="submit" value="Save Changes" class="small"/>
 <table> 
 <thead>
 <tr>
 <th colspan="7">
 @Html.ActionLink("<", "Index", new { year = prev.Year, month = prev.Month, day = prev.Day }, new {Class="wb"})
-<a href="javascript:checkAll()">
+<a href="javascript:checkAll(0,35)">
 @Common.Month[Model.StartDate.Month-1]
 @Model.StartDate.Year
 </a>
 @Html.ActionLink(">", "Index", new { year = next.Year, month = next.Month, day = next.Day },new {Class="wb"})
-<input type="submit" value="Save" class="small floatright"/>
 </th>
 </tr>
 <tr>
@@ -51,12 +52,10 @@
 {
     var heading = today.Day + " " + Common.Month[today.Month - 1];
     var trid = "tr" + i % 2;
-    <tr class='@trid'><th  style='text-align:left;'>@Common.Weekdays[(int)today.DayOfWeek][0]<span class="moredata">@Common.Weekdays[(int)today.DayOfWeek].Substring(1)</span></th><th style='text-align:left;'><small>@heading</small></th>
-
+    <tr class='@trid'><th  style='text-align:left;'><a href="javascript:checkAll(@i*5,@i*5+5)">@Common.Weekdays[(int)today.DayOfWeek][0]<span class="moredata">@Common.Weekdays[(int)today.DayOfWeek].Substring(1)</span></a></th><th style='text-align:left;'><small>@heading</small></th>
         @for (int j = 0; j < 5; j++) 
         {
-            <td>@Html.CheckBoxFor(o=>o.SalahStatus[i*5+j])
-                <!--input type="checkbox" @(Model.SalahStatus[i*5+j]?"checked":"")/--> </td>
+            <td>@Html.CheckBoxFor(o=>o.SalahStatus[i*5+j])</td>
         }
         @{today = today.AddDays(1.0);}
         </tr>
