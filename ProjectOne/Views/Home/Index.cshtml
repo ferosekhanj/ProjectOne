@@ -5,6 +5,12 @@
 }
 <section>
     <div class="section group">
+    <blockquote class="col span_4_of_5">
+        "The first matter a slave will be brought to account is the prayer. If it is sound, then the rest of his deeds will be sound. And if it is bad, then the rest of his deeds will be bad."
+        <cite>-Tabrani</cite>
+    </blockquote>
+    </div>
+    <div class="section group">
     <article class="col span_1_of_2">
     <h1>Welcome!!</h1>
         <p>Improve your prayer compliance in 3 easy steps.</p>
@@ -26,15 +32,15 @@
         <ol>
             <li>
                 @Html.LabelFor(m => m.Username)
-                @Html.TextBoxFor(m=>m.Username , new {placeholder="Enter user name" ,required=""})
+                @Html.TextBoxFor(m=>m.Username , new {placeholder="Enter user name" ,required="",autocomplete="off"})
             </li>
             <li>
                 @Html.LabelFor(m=>m.Password)
-                @Html.PasswordFor(m=>m.Password, new {placeholder="Enter password",required="" })
+                @Html.PasswordFor(m=>m.Password, new {placeholder="Enter password",required="",autocomplete="off" })
             </li>
             <li>
                 @Html.LabelFor(m=>m.ConfirmPassword)
-                @Html.PasswordFor(m=>m.ConfirmPassword,new {placeholder="Confirm password",required="" })
+                @Html.PasswordFor(m=>m.ConfirmPassword,new {placeholder="Confirm password",required="",autocomplete="off" })
             </li>
             <li>
                 @Html.LabelFor(m=>m.Email)
@@ -46,12 +52,6 @@
     </fieldset>
 }
     </article>
-</div>
-<div class="section group">
-<blockquote class="col span_4_of_5">
-    "The first matter a slave will be brought to account is the prayer. If it is sound, then the rest of his deeds will be sound. And if it is bad, then the rest of his deeds will be bad."
-    <cite>-Tabrani</cite>
-</blockquote>
 </div>
 </section>
 <script>
