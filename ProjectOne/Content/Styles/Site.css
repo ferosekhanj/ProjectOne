@@ -243,6 +243,9 @@ hr {
 .vprogressbar {
     background-color: rgb(139,194,65);
 }
+.vprogressbari {
+    background-color: orangered;
+}
 .mobileaxis {
     display:none;
 }

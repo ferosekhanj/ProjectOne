@@ -42,8 +42,9 @@
                 }
                 else
                 {
-                    @String.Format("{0:f0}%",Model.ItemPercentage[i]*100.0f)
-                    <div class="vprogressbar" style="height:@((Model.ItemPercentage[i] * 100.0f) + "%");">&nbsp;</div>
+                    var style = (Model.ItemPercentage[i] < 1.0f) ? "vprogressbari" : "vprogressbar";
+                    <small class="moredata">@String.Format("{0:f0}%",Model.ItemPercentage[i]*100.0f)</small>
+                    <div class="@style" style="height:@((Model.ItemPercentage[i] * 100.0f) + "%");">&nbsp;</div>
                 }
             </td>
 }
