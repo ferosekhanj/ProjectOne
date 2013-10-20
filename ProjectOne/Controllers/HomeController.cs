@@ -27,5 +27,26 @@ namespace ProjectOne.Controllers
         {
             return View();
         }
+
+        //
+        // GET: /Home/About/
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        //
+        // GET: /Home/TermsOfUse/
+        public ActionResult TermsOfUse()
+        {
+            return View();
+        }
+        
+        //
+        // GET: /Home/PrivacyPolicy/
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
     }
 }

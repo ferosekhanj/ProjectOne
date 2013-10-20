@@ -139,6 +139,7 @@
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\UserProfileRepository.cs" />
+    <Compile Include="ViewModels\HtmlHelpers.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\Common.cs" />
     <Compile Include="Models\PrayerLog.cs" />
@@ -230,6 +231,9 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\mysalah - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\mysalah - Web Deploy.pubxml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Home\TermsOfUse.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ProjectOne.ViewModels
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -12,7 +13,7 @@
 <body>
 <div class="container">
 <header>
-<h1 class="floatleft">mysalah</h1>
+<h1 class="floatleft">MYSALAH</h1>
 </header>
 <nav class="floatright" >
 <ul>
@@ -26,7 +27,7 @@
         @RenderBody()
 <hr/>
 <footer>
-&#169; @DateTime.Now.Year | Contact us | Terms of use| Privacy Policy|@Html.ActionLink("About","Index","Log")
+&#169; @DateTime.Now.Year | @Html.ContactLink("Contact Us") | @Html.ActionLink("Terms of use","TermsOfUse","Home")|@Html.ActionLink("Privacy Policy","PrivacyPolicy","Home")| @Html.ActionLink("About","About","Home")
 </footer>
 </div>
 </body>
