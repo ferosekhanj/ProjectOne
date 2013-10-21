@@ -38,6 +38,11 @@ namespace ProjectOne
                 defaults: new { controller = "Review", action = "Year", year=DateTime.Now.Year }
             );
 
+            routes.MapRoute(
+                name: "ResetPassword",
+                url: "Account/ResetPassword/{token}",
+                defaults: new { controller = "Account", action = "ResetPassword"}
+            );
 
             routes.MapRoute(
                 name: "Default",

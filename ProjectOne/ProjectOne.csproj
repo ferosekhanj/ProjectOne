@@ -52,6 +52,9 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -137,8 +140,11 @@
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MakeupController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Mailers\IUserMailer.cs" />
+    <Compile Include="Mailers\UserMailer.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\UserProfileRepository.cs" />
+    <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\HtmlHelpers.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\Common.cs" />
@@ -229,11 +235,14 @@
     <Content Include="Views\Error\InternalServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\mysalah - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\mysalah - Web Deploy.pubxml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\PrivacyPolicy.cshtml" />
     <Content Include="Views\Home\TermsOfUse.cshtml" />
+    <Content Include="Views\UserMailer\_Layout.cshtml" />
+    <Content Include="Views\UserMailer\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\UserMailer\Welcome.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

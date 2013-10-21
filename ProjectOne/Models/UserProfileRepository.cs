@@ -32,6 +32,17 @@ namespace ProjectOne.Models
         }
 
         /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="theUsername"></param>
+        public UserProfileRepository(string theUsername)
+        {
+            myDB = new DatabaseContext();
+            myOwnDB = true;
+            myUserId = FindUserProfileByUsername(theUsername);
+        }
+
+        /// <summary>
         /// Construct using an external DbContext
         /// </summary>
         /// <param name="theUserId"></param>
@@ -76,6 +87,13 @@ namespace ProjectOne.Models
             if(myOwnDB && myDB !=null)
                 myDB.Dispose();
             myDB = null;
+        }
+
+        private int FindUserProfileByUsername(string theUsername)
+        {
+            var up = from b in myDB.UserProfiles where b.Name == theUsername select b;
+            myUserProfile = up.First();
+            return myUserProfile.Id;
         }
 
     }

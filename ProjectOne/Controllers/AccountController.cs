@@ -1,4 +1,5 @@
-﻿using ProjectOne.Models;
+﻿using ProjectOne.Mailers;
+using ProjectOne.Models;
 using ProjectOne.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,11 @@ namespace ProjectOne.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(theFormData.Username, theFormData.Password, new { Email = theFormData.Email, Active = true, Timezone=Common.CalculateTimezoneFromOffset(theFormData.TimezoneOffset) }, false);
                     WebSecurity.Login(theFormData.Username, theFormData.Password);
+
+                    IUserMailer aMailer = new UserMailer();
+                    var aResetMail = aMailer.Welcome(theFormData.Username,theFormData.Email);
+                    aResetMail.Send();
+
                     return RedirectToAction("Index", "Log");
                 }
                 catch (MembershipCreateUserException e)
@@ -113,6 +119,82 @@ namespace ProjectOne.Controllers
                     theFormData.Save();
                 }
 
+            }
+            return View(theFormData);
+        }
+        //
+        // GET: /Account/ForgotPassword
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            ViewBag.MailSent = false;
+            return View();
+        }
+
+        //
+        // POST: /Account/ForgotPassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult ForgotPassword(string Username)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(Username))
+                {
+                    try
+                    {
+                        using (IUserProfileRepository r = new UserProfileRepository(Username))
+                        {
+                            var aResetToken = WebSecurity.GeneratePasswordResetToken(r.UserProfile.Name);
+                            IUserMailer aMailer = new UserMailer();
+
+                            var aResetMail = aMailer.ForgotPassword(r.UserProfile.Email, aResetToken);
+                            aResetMail.Send();
+                            ViewBag.MailSent = true;
+                            ViewBag.Message = "We have sent a recovery mail to your email id. Follow the steps in the mail.";
+                        }
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        ViewBag.MailSent = false;
+                        ModelState.AddModelError("", string.Format("We could not find an user linked to {0} in our database. Kindly check the username.", Username));
+                    }
+                }
+            }
+            return View();
+        }
+
+        //
+        // GET: /Account/ResetPassword/{token}
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string token)
+        {
+            ResetPasswordViewModel r = new ResetPasswordViewModel { NewPassword = "", Token = token };
+            return View(r);
+        }
+
+        //
+        // POST: /Account/ResetPassword/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult ResetPassword(ResetPasswordViewModel theFormData)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(theFormData.NewPassword) && !string.IsNullOrEmpty(theFormData.Token))
+                {
+                    try
+                    {
+                        WebSecurity.ResetPassword(theFormData.Token, theFormData.NewPassword);
+                        return RedirectToAction("Login");
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        ModelState.AddModelError("", e.Message);
+                    }
+                }
             }
             return View(theFormData);
         }

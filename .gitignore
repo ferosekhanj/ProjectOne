@@ -29,6 +29,8 @@ _UpgradeReport_Files/
 bin/
 obj/
 TestResults/
+Azure/
+App_Data/
 ###################
 # Web publish log #
 ###################
