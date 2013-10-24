@@ -100,6 +100,10 @@ namespace ProjectOne.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (WebSecurity.CurrentUserName=="demo786")
+                {
+                    return View(theFormData);
+                }
                 if (!string.IsNullOrEmpty(theFormData.OldPassword) 
                     && !string.IsNullOrEmpty(theFormData.NewPassword) 
                     && !string.IsNullOrEmpty(theFormData.ConfirmPassword))
@@ -198,6 +202,16 @@ namespace ProjectOne.Controllers
             }
             return View(theFormData);
         }
+
+        //
+        // GET: /Account/ShowDemo/
+        [AllowAnonymous]
+        public ActionResult ShowDemo()
+        {
+            WebSecurity.Login("demo786", "123456", false);
+            return RedirectToAction("Index", "Log");
+        }
+
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
