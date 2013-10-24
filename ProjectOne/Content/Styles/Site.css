@@ -179,6 +179,10 @@ textarea {
 input:focus, textarea:focus {
     border: 1px solid #7ac0da;
 }
+input[type="checkbox"]:focus {
+outline:2px dotted #7ac0da;
+outline-offset:5px;
+}
 
 input[type="checkbox"] {
     background: transparent;

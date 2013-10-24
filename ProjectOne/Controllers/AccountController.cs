@@ -155,7 +155,7 @@ namespace ProjectOne.Controllers
                             ViewBag.Message = "We have sent a recovery mail to your email id. Follow the steps in the mail.";
                         }
                     }
-                    catch (InvalidOperationException e)
+                    catch (InvalidOperationException)
                     {
                         ViewBag.MailSent = false;
                         ModelState.AddModelError("", string.Format("We could not find an user linked to {0} in our database. Kindly check the username.", Username));
