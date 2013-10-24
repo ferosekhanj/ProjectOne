@@ -17,15 +17,17 @@
     }
 </script>
 <section>
-<h1>Enter the completed prayers</h1>
-<div  class="section group">
-<div class="col span_3_of_3">
+<h1 class="floatleft">Enter the completed prayers</h1>
 @using(var f = Html.BeginForm("Save","Log"))
 {
-    @Html.HiddenFor(o=>o.StartDate)
-    @Html.HiddenFor(o=>o.EndDate)
+<div class="floatright">
 <input type="reset" value="Undo Changes" class="small"/>
 <input type="submit" value="Save Changes" class="small"/>
+</div>
+<div  class="section group">
+<div class="col span_3_of_3">
+    @Html.HiddenFor(o=>o.StartDate)
+    @Html.HiddenFor(o=>o.EndDate)
 <table> 
 <thead>
 <tr>
@@ -62,7 +64,7 @@
 }
 </tbody>
 </table>
+</div>
+</div>
 }
-</div>
-</div>
 </section>

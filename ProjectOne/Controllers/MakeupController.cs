@@ -44,7 +44,7 @@ namespace ProjectOne.Controllers
                     mvm.Repository = aRepository;
                     mvm.SaveData();
                 }
-                return View("List", mvm);
+                return RedirectToAction("List");
             }
         }
     }

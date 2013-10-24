@@ -3,8 +3,18 @@
 @{
     ViewBag.Title = "Makeup Prayers";
 }
+<script>
+    function checkAll(st,en)
+    {
+        for(var i=st;i< en;i++)
+        {
+            var input = document.getElementById("SalahStatus_"+i+"_");
+            input.checked = true;
+        }
+    }
+</script>
 <section>
-<h1>Makeup missed prayers</h1>
+<h1 class="floatleft">Makeup missed prayers</h1>
 @if(Model.SalahDate.Count==0)
 { 
 <div class="section group">
@@ -16,38 +26,43 @@
 }
 @if( Model.SalahDate.Count!=0)
 {
-<div  class="section group">
-<div class="col span_3_of_3">
-@using(var f = Html.BeginForm("Save","Makeup"))
+using (var f = Html.BeginForm("Save", "Makeup"))
 {
+<div class="floatright">
 <input type="reset" value="Undo Changes" class="small"/>
 <input type="submit" value="Save Changes" class="small"/>
+</div>
+<div  class="section group">
+<div class="col span_3_of_3">
 <table> 
 <thead>
 <tr>
 <th colspan="7">
+<a href="javascript:checkAll(0,@Model.SalahDate.Count*5)">
+Makeup these @Model.SalahDate.Count days 
+</a>
 </th>
 </tr>
 <tr>
 <th style="width:2%;"></th>
 <th style="width:10%;"></th>
-@for (int i = 0; i < 5; i++) 
+@for (int i = 0; i < 5; i++)
 {
-    <th><span aria-hidden="true" class="icons icon-@Common.Waqt[i].ToLower()"> </span>@Common.Waqt[i].Substring(0,2)<span class="moredata">@Common.Waqt[i].Substring(2)</span></th>
+    <th><span aria-hidden="true" class="icons icon-@Common.Waqt[i].ToLower()"> </span>@Common.Waqt[i].Substring(0, 2)<span class="moredata">@Common.Waqt[i].Substring(2)</span></th>
 }
 </tr>
 </thead>
 <tbody>
-@for (int i = 0; i< Model.SalahDate.Count ; i++) 
+@for (int i = 0; i < Model.SalahDate.Count; i++)
 {
-    var heading = Model.SalahDate[i].Day + " " + Common.Month[Model.SalahDate[i].Month - 1]+" "+ Model.SalahDate[i].Year;
+    var heading = Model.SalahDate[i].Day + " " + Common.Month[Model.SalahDate[i].Month - 1] + " " + Model.SalahDate[i].Year;
     var trid = "tr" + i % 2;
     <tr class='@trid'>
-        <th  style='text-align:left;'>@Common.Weekdays[(int)Model.SalahDate[i].DayOfWeek][0]<span class="moredata">@Common.Weekdays[(int)Model.SalahDate[i].DayOfWeek].Substring(1)</span></th><th style='text-align:left;'><small>@heading</small>
+        <th  style='text-align:left;'><a href="javascript:checkAll(@i*5,@i*5+5)">@Common.Weekdays[(int)Model.SalahDate[i].DayOfWeek][0]<span class="moredata">@Common.Weekdays[(int)Model.SalahDate[i].DayOfWeek].Substring(1)</span></a></th><th style='text-align:left;'><small>@heading</small>
         @Html.HiddenFor(o => o.SalahDate[i])
         </th>
 
-        @for (int j = 0; j < 5; j++) 
+        @for (int j = 0; j < 5; j++)
         {
             <td>
                     @Html.CheckBoxFor(o => o.SalahStatus[i * 5 + j])
@@ -57,8 +72,9 @@
 }
 </tbody>
 </table>
+
+</div>
+</div>
 }
-</div>
-</div>
 }
 </section>
