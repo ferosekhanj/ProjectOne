@@ -6,16 +6,6 @@
     var prev  = Model.StartDate.AddDays(-7.0);
     var next  = Model.EndDate.AddDays(1.0);
 }
-<script>
-    function checkAll(st,en)
-    {
-        for(var i=st;i< en;i++)
-        {
-            var input = document.getElementById("SalahStatus_"+i+"_");
-            input.checked = true;
-        }
-    }
-</script>
 <section>
 <h1 class="floatleft">Enter the completed prayers</h1>
 @using(var f = Html.BeginForm("Save","Log"))

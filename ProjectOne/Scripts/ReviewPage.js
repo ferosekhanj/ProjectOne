@@ -34,3 +34,11 @@
         legend.style.textAlign = "left";
     }
 }
+
+function checkAll(st, en) {
+    for (var i = st; i < en; i++) {
+        var input = document.getElementById("SalahStatus_" + i + "_");
+        input.checked = true;
+    }
+}
+

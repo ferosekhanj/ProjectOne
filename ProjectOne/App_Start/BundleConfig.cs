@@ -9,6 +9,7 @@ namespace ProjectOne
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/Styles/Site.css", "~/Content/Styles/Responsive.css"));
+            bundles.Add(new ScriptBundle("~/Content/scripts").Include("~/Scripts/ReviewPage.js"));
         }
     }
 }

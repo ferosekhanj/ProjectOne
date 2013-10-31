@@ -3,16 +3,6 @@
 @{
     ViewBag.Title = "Makeup Prayers";
 }
-<script>
-    function checkAll(st,en)
-    {
-        for(var i=st;i< en;i++)
-        {
-            var input = document.getElementById("SalahStatus_"+i+"_");
-            input.checked = true;
-        }
-    }
-</script>
 <section>
 <h1 class="floatleft">Makeup missed prayers</h1>
 @if(Model.SalahDate.Count==0)

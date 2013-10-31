@@ -9,6 +9,7 @@
 <!--[if lt IE 9]>
 	<script src="~/scripts/html5shiv.js"></script>
 <![endif]-->
+    @Scripts.Render("~/Content/scripts")
 </head>
 <body>
 <div class="container">
@@ -18,7 +19,7 @@
 <nav class="floatright" >
 <ul>
 <li><span aria-hidden="true" class="icons icon-home"> </span>@Html.ActionLink("HOME","Index","Home")</li>
-<li><span aria-hidden="true" class="icons icon-key-stroke "> </span>@Html.ActionLink("LOGIN","Login","Account")</li>
+<li><span aria-hidden="true" class="icons icon-key-stroke "> </span>@Html.ActionLink("SIGN IN","Login","Account")</li>
 </ul>
 </nav>
 <div class="section group">
